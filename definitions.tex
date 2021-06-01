@@ -1,0 +1,109 @@
+%  _______________________________________________ 
+% |_______________________________________________|
+%  ____        __ _       _ _   _                 
+% |  _ \  ___ / _(_)_ __ (_) |_(_) ___  _ __  ___ 
+% | | | |/ _ \ |_| | '_ \| | __| |/ _ \| '_ \/ __|
+% | |_| |  __/  _| | | | | | |_| | (_) | | | \__ \
+% |____/ \___|_| |_|_| |_|_|\__|_|\___/|_| |_|___/
+%  _______________________________________________ 
+% |_______________________________________________|
+
+% PACKAGES
+
+
+% BOLD VECTORS
+
+\let\vec\mathbf
+
+
+% IMAGES PATH
+
+\graphicspath{{images/}}
+
+
+% LSTLISTING
+
+\definecolor{sh_background}{HTML}{384351}
+\definecolor{sh_foreground}{HTML}{E4E9EF}
+\definecolor{sh_keyword}{HTML}{9FBE90}
+\definecolor{sh_comment}{HTML}{BA8EAB}
+\definecolor{sh_string}{HTML}{75C2CF}
+\definecolor{sh_yellow}{HTML}{F4C891}
+\definecolor{sh_red}{HTML}{CC5C6B}
+\definecolor{sh_blue}{HTML}{75A4BF}
+\definecolor{sh_dark}{HTML}{2C353F}
+
+
+
+\lstdefinestyle{shell}{
+  language=bash,
+  morekeywords={*, git, clone, add, commit, push}, 
+  basicstyle=\color{sh_foreground}\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{sh_keyword},
+  commentstyle=\itshape\color{sh_comment},
+  backgroundcolor=\color{sh_background},
+  identifierstyle=\color{sh_foreground},
+  stringstyle=\color{sh_string}\itfamily,
+  numbers=left,
+  numberstyle=\color{sh_comment}\small\ttfamily,
+  numbersep=7pt,
+  % frame=tb,
+  frame=L,
+  showstringspaces=false,
+  breaklines=true,
+  columns=fullflexible,
+  linewidth=0.9\linewidth,
+  xleftmargin=0.15\linewidth, % \parindent,  % 
+  xrightmargin=0.05\linewidth,
+}
+
+
+% FOREST -> Tree directory
+
+\usepackage[edges]{forest}
+\definecolor{folderbg}{RGB}{124,166,198}
+\definecolor{folderborder}{RGB}{110,144,169}
+\newlength\Size
+\setlength\Size{4pt}
+\tikzset{%
+  folder/.pic={%
+    \filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);
+    \filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+  },
+  file/.pic={%
+    \filldraw [draw=folderborder, top color=folderbg!5, bottom color=folderbg!10] (-\Size,.4*\Size+5pt) coordinate (a) |- (\Size,-1.2*\Size) coordinate (b) -- ++(0,1.6*\Size) coordinate (c) -- ++(-5pt,5pt) coordinate (d) -- cycle (d) |- (c) ;
+  },
+}
+\forestset{%
+  declare autowrapped toks={pic me}{},
+  declare boolean register={pic root},
+  pic root=0,
+  pic dir tree/.style={%
+    for tree={%
+      folder,
+      font=\ttfamily,
+      grow'=0,
+    },
+    before typesetting nodes={%
+      for tree={%
+        edge label+/.option={pic me},
+      },
+      if pic root={
+        tikz+={
+          \pic at ([xshift=\Size].west) {folder};
+        },
+        align={l}
+      }{},
+    },
+  },
+  pic me set/.code n args=2{%
+    \forestset{%
+      #1/.style={%
+        inner xsep=2\Size,
+        pic me={pic {#2}},
+      }
+    }
+  },
+  pic me set={directory}{folder},
+  pic me set={file}{file},
+}
