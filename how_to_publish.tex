@@ -4,7 +4,7 @@ There are several ways to create a repository on \textsf{GitHub}, but here we wi
 
 \subsection{From scratch}
 
-The easiest way to create a repository is by starting from the website. Once you have your account\footnote{Please, if you don't have a \textsf{GitHub} account yet, \href{https://github.com/join}{join here}.}, you can follow the following steps in the \textsf{GitHub} webpage.
+The easiest way to create a repository is by starting from the website. Once you have your account\footnote{Please, if you don't have a \textsf{GitHub} account yet, \href{https://github.com/join}{join here}.}, you can follow the next steps in the \textsf{GitHub} webpage.
 
 In the upper-right corner of any page, click on the plus $+$ sign to display the drop-down menu and then select \textsf{New Repository}; then a section will appear like the screenshot shown in Figure \ref{fig:Repo}.
 
@@ -19,7 +19,7 @@ In the upper-right corner of any page, click on the plus $+$ sign to display the
     \label{fig:Repo}
 \end{figure}
 
-Below the \textsf{Owner} drop-down menu you can choose your own user, or a group to which you belong. As we all know, it is difficult for scientists to choose original names and that is why \textit{Octocat} always tries to inspire us with a ``short and memorable'' name for our repositories.
+Below the \textsf{Owner} drop-down menu you can choose your own user, or a group to which you belong. As we all know, it is difficult for scientists to choose original names and that is why \textit{Octocat} always tries to inspire us with a ``short and memorable'' name for our repositories under the \textsf{Repository name} entry.
 
 Writing a \textsf{Description} is always recommended, although optional. This will help the user understand the subject of the project before clicking to read the code.
 
@@ -38,20 +38,34 @@ Before clicking \textsf{Create repository}, you can change the default branch na
 
 Maybe you have a local project and you want to publish it. If so, you can do it cleanly by following these steps.
 
-First follow the steps written in previous section ``From scratch'', but stop once you had choosen the visibility of the repo. Don't add any files! as you can see, \textit{Octocat} suggests you skip that step if you're importing an existing repository, because when you push your files there will be merge conflicts (believe me you don't want that). Once this is done, you can \textsf{Create repository} and you will see some help commands.
+First follow the steps written in previous section ``From scratch'', but stop once you had choosen the visibility of the repo. Don't add any files! as you can see, \textit{Octocat} suggests you skip that step if you're importing an existing repository, because when you push your files there will have merge conflicts ---and believe me you don't want that. Once this is done, you can \textsf{Create repository} and you will see some help commands.
 
 Open your favorite terminal emulator and \texttt{cd} into the root directory of your project. Then, initialize a git local repository as follows
 
 \begin{lstlisting}[style=shell]
 cd /path/to/root/dir/
-git init  # Initialize git repo (a directory .git/ appears)
+git init                                                            # Initialize git repo (a directory .git/ appears)
 git remote add origin https://github.com/<username>/<reponame>.git  # Add remote
-vim .gitignore  # Edit a .gitignore if you want
-git add --all  # Track all files except .gitignored
-git commit -m "Mi first commit"  # Write a commit message 
-git push -u origin master  # Push your new branch to GitHub
+vim .gitignore                                                      # Edit a .gitignore if you want
+git add --all                                                       # Track all files except .gitignored
+git commit -m "Mi first commit"                                     # Write a commit message 
+git push -u origin master                                           # Push your new branch to GitHub
 \end{lstlisting}
 
+Finally, if you refresh the webpage you will see your \textit{\texttt{pushed}} repository with a nice readme below ---or an invitation to create it, failing that.
+
+But keep this in mind! If you add a readme from the \textsf{GitHub} webpage, a new commit will appear in the history of your \texttt{origin}, hence you must pull the changes to rour local repository:
+\begin{lstlisting}[style=shell]
+git fetch origin master  # Check updates
+git pull origin master   # Download and merge updates
+\end{lstlisting}
+
+Learn more about these commands:
+\begin{lstlisting}[style=shell]
+man git fetch
+man git pull
+man <any_command>
+\end{lstlisting}
 
 \subsection{Magit}
 
@@ -72,14 +86,3 @@ As is written in the \href{https://github.com/next-exp/IC/blob/master/CONTRIBUTI
 \vspace{8pt}
 
 This tool is very useful to interact with git. The easiest GUI maybe is \textit{GitHub Desktop}, but it isn't powerful enough.
-
-% \begin{figure} %[htp]
-%     \centering
-%     \begin{tikzpicture}
-%     \sbox0{\includegraphics[width=\linewidth]{how_to_fork.png}}%
-%     \path[clip,rounded corners=10pt] (0,0) rectangle (\wd0,\ht0);
-%     \path (0.5\wd0,0.5\ht0) node[inner sep=0pt]{\usebox0};
-%     \end{tikzpicture}
-%     \caption{\textsf{Fork} button is in the top-right margin of the page.}
-%     \label{fig:Fork}
-% \end{figure}
