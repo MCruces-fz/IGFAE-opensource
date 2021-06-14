@@ -2,20 +2,13 @@
 
 You can include an open source license in your repository to make it easier for other people to contribute.
 
-On \textsf{GitHub}, navigate to the main page of the repository to which you want to add the license. To the left of the green button \textsf{Code}, click on \textsf{Add file} $>$ \textsf{Create new file}. In the file name field type ``\textit{LICENSE}''\footnote{With all caps recommended, but with small letters it will work.} and to the right of the file name field a new button will appear: \textsf{Choose a license template}. Click on it!
+On \textsf{GitHub}, navigate to the main page of the repository to which you want to add the license. Check Figure \ref{fig:Fork}, and to the left of the green button \textsf{Code}, click on \textsf{Add file} $>$ \textsf{Create new file}. In the file name field type ``\textit{LICENSE}''\footnote{With all caps recommended, but with small letters it will work.} and to the right of the file name field a new button will appear: \textsf{Choose a license template}. Click on it!
 
 On the left side of the page, under \textsf{Add a license to your project}, review the available licenses, then select a license from the list, click \textsf{Review and submit} and finally commit changes.
 
 Again, remember \texttt{git fetch} and \texttt{git pull} into your local repository.
 
-\begin{figure} %[htp]
-    \centering
-    \begin{tikzpicture}
-    \sbox0{\includegraphics[width=\linewidth]{how_to_fork.png}}%
-    \path[clip,rounded corners=10pt] (0,0) rectangle (\wd0,\ht0);
-    \path (0.5\wd0,0.5\ht0) node[inner sep=0pt]{\usebox0};
-    \end{tikzpicture}
-    \caption{Example of main page of a repository.}
-    \label{fig:Fork}
-\end{figure}
+Once you have your \textit{LICENSE} file commited, you can add a small piece of text that refers to the license in the header of each file to which said license is applied. If your license allows other developers to edit your code, they must edit the header of the files that are modified following your guidelines.
+
+For more help, visit \href{https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository}{\textsf{Adding a license to a repository}}
 
